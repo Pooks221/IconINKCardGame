@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
@@ -10,15 +11,16 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        
+        lobbyText.SetActive(false);
     }
 
     public void CreateRoom(int n)
     {
-        var str = "Room" + n;
+        lobbyText.SetActive(true);
+        var str = "Room " + n;
         PhotonNetwork.CreateRoom(str);
         
-        lobbyText.GetComponent<Text>().text = "You have created " + str;
+        lobbyText.GetComponent<TextMeshProUGUI>().text = "You have created " + str;
     }
 
     public void JoinRoom(int n)
@@ -26,16 +28,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         var str = "Room" + n;
         PhotonNetwork.JoinRoom(str);
 
-        lobbyText.GetComponent<Text>().text = "You have joined " + str;
+        lobbyText.GetComponent<TextMeshProUGUI>().text = "You have joined " + str;
     }
 
     public override void OnJoinedRoom()
     {
-        lobbyText.GetComponent<Text>().text += "\n PlayerCount:" + PhotonNetwork.CountOfPlayers;
-    }
-    public override void OnCreatedRoom()
-    {
-        lobbyText.GetComponent<Text>().text += "\n PlayerCount:" + PhotonNetwork.CountOfPlayers;
+        lobbyText.GetComponent<TextMeshProUGUI>().text += "\n PlayerCount:" + PhotonNetwork.CountOfPlayers;
     }
 
     //private void setLobbyName(string s)

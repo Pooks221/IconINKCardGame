@@ -25,7 +25,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public void CreateRoom(int n)
     {
         lobbyText.SetActive(true);
-        var str = "Room " + n;
+        var str = "Room"+n;
         PhotonNetwork.CreateRoom(str);
 
         textMesh.text = "Creating: " + str;

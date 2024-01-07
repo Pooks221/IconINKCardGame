@@ -8,10 +8,18 @@ using TMPro;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     public GameObject lobbyText;
+    public GameObject PlayerCountText;
+
+    private TextMeshProUGUI textMesh;
+    private TextMeshProUGUI playerCountTextMesh;
+
+    private float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
         lobbyText.SetActive(false);
+        textMesh = lobbyText.GetComponent<TextMeshProUGUI>();
+        playerCountTextMesh = PlayerCountText.GetComponent<TextMeshProUGUI>();
     }
 
     public void CreateRoom(int n)
@@ -19,8 +27,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         lobbyText.SetActive(true);
         var str = "Room " + n;
         PhotonNetwork.CreateRoom(str);
-        
-        lobbyText.GetComponent<TextMeshProUGUI>().text = "You have created " + str;
+
+        textMesh.text = "Creating: " + str;
     }
 
     public void JoinRoom(int n)
@@ -28,12 +36,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         var str = "Room" + n;
         PhotonNetwork.JoinRoom(str);
 
-        lobbyText.GetComponent<TextMeshProUGUI>().text = "You have joined " + str;
+        textMesh.text = "Joining: " + str;
     }
 
     public override void OnJoinedRoom()
     {
-        lobbyText.GetComponent<TextMeshProUGUI>().text += "\n PlayerCount:" + PhotonNetwork.CountOfPlayers;
+        textMesh.text += "Sucessfully joined room: " + PhotonNetwork.CurrentRoom.Name;
     }
 
     //private void setLobbyName(string s)
@@ -45,6 +53,11 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+        timer -= Time.deltaTime;
+        if(timer < 0)
+        {
+            timer = 1;
+            playerCountTextMesh.text = "Player Count: "+ PhotonNetwork.CurrentRoom.PlayerCount;
+        }
     }
 }

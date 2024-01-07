@@ -37,10 +37,23 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void JoinRoom(int n)
     {
+        lobbyText.SetActive(true);
         var str = "Room" + n;
         PhotonNetwork.JoinRoom(str);
 
         textMesh.text = "Joining: " + str;
+    }
+    public void LeaveRoom()
+    {
+        lobbyText.SetActive(true);
+        PhotonNetwork.LeaveRoom();
+
+        textMesh.text = "Leaving Room...";
+    }
+
+    public override void OnLeftRoom()
+    {
+        textMesh.text = "Room Left!";
     }
 
     public override void OnJoinedRoom()

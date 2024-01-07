@@ -30,6 +30,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
         textMesh.text = "Creating: " + str;
     }
+    public override void OnJoinedLobby()
+    {
+        textMesh.text = "Joined Lobby: "+PhotonNetwork.CurrentLobby;
+    }
 
     public void JoinRoom(int n)
     {
@@ -41,7 +45,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        textMesh.text += "Sucessfully joined room: " + PhotonNetwork.CurrentRoom.Name;
+        textMesh.text = "Sucessfully joined room: " + PhotonNetwork.CurrentRoom.Name;
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        textMesh.text = message;
     }
 
     //private void setLobbyName(string s)

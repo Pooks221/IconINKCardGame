@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8759335187349159761}
   - component: {fileID: 993114698515790178}
   - component: {fileID: 8649900012368939612}
-  - component: {fileID: 2658878183475121609}
+  - component: {fileID: 8934444614916674461}
+  - component: {fileID: -7123654265601194529}
   m_Layer: 0
   m_Name: Grab cube
   m_TagString: Untagged
@@ -144,7 +145,7 @@ MonoBehaviour:
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
   _pointableElement: {fileID: 993114698515790178}
-  _rigidbody: {fileID: 2658878183475121609}
+  _rigidbody: {fileID: 0}
   _physicsGrabbable: {fileID: 0}
   _resetGrabOnGrabsUpdated: 1
   _scoringModifier:
@@ -168,7 +169,24 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
---- !u!54 &2658878183475121609
+--- !u!114 &8934444614916674461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5611117101464514115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1465956334
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
+--- !u!54 &-7123654265601194529
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

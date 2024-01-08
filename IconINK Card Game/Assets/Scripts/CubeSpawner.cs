@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using Fusion.Sockets;
 
 public class CubeSpawner : MonoBehaviour
 {
@@ -12,20 +13,26 @@ public class CubeSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        runner = RunnerObject.GetComponent<NetworkRunner>();
+        runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
         //spawnCube();
+       
+        //Debug.Log(Fusion.NetworkRunner.GetRunnerForGameObject(gameObject).SessionInfo.PlayerCount);
     }
 
     public void spawnCube()
     {
         test.GetComponent<MeshRenderer>().material.color = new Color(Random.value * 255, Random.value * 255, Random.value * 255);
-        Debug.Log(runner);
-        Debug.Log(prefabCube);
-        runner.Spawn(prefabCube, Vector3.zero, Quaternion.identity);
+        runner.Spawn(prefabCube, transform.position, transform.rotation);
+    }
+
+    public void connected()
+    {
+        Debug.Log("Connected");
+        runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
     }
 }

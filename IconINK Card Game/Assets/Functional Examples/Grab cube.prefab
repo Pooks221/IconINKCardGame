@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8649900012368939612}
   - component: {fileID: 8934444614916674461}
   - component: {fileID: -7123654265601194529}
+  - component: {fileID: 7334620765079467282}
   m_Layer: 0
   m_Name: Grab cube
   m_TagString: Untagged
@@ -185,7 +186,8 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 7334620765079467282}
 --- !u!54 &-7123654265601194529
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213,3 +215,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7334620765079467282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5611117101464514115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 0
+  DisableSharedModeInterpolation: 1

@@ -27,7 +27,8 @@ public class CubeSpawner : MonoBehaviour
     public void spawnCube()
     {
         test.GetComponent<MeshRenderer>().material.color = new Color(Random.value * 255, Random.value * 255, Random.value * 255);
-        runner.Spawn(prefabCube, transform.position, transform.rotation);
+        NetworkObject go = runner.Spawn(prefabCube, transform.position, transform.rotation);
+        go.GetComponent<MeshRenderer>().material.color = new Color(Random.value * 255, Random.value * 255, Random.value * 255);
     }
 
     public void connected()

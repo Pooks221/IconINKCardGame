@@ -33,6 +33,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         textMesh.text = "Joined Lobby: "+PhotonNetwork.CurrentLobby;
+
+      
     }
 
     public void JoinRoom(int n)

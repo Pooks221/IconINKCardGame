@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+//using Photon.Pun;
+using Fusion;
 using UnityEngine.UI;
 using TMPro;
 
-public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
+public class CreateAndJoinRooms : MonoBehaviour
 {
     public GameObject lobbyText;
     public GameObject PlayerCountText;
+    public TMP_InputField inputTextField;
+    public NetworkRunner runner;
 
     private TextMeshProUGUI textMesh;
     private TextMeshProUGUI playerCountTextMesh;
+    private List<SessionInfo> sessionList;
 
     private float timer = 0;
     // Start is called before the first frame update
@@ -20,52 +24,83 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         lobbyText.SetActive(false);
         textMesh = lobbyText.GetComponent<TextMeshProUGUI>();
         playerCountTextMesh = PlayerCountText.GetComponent<TextMeshProUGUI>();
+        SubmitRoom();
     }
 
-    public void CreateRoom(int n)
+    public void CreateRoom(string str)
     {
         lobbyText.SetActive(true);
-        var str = "Room"+n;
-        PhotonNetwork.CreateRoom(str);
+        //PhotonNetwork.CreateRoom(str);
+        runner.StartGame(new StartGameArgs()
+        {
+            GameMode = GameMode.Shared,
+            SessionName = str
+        });
 
         textMesh.text = "Creating: " + str;
     }
-    public override void OnJoinedLobby()
+    public void SubmitRoom()
     {
-        textMesh.text = "Joined Lobby: "+PhotonNetwork.CurrentLobby;
+        string roomStr = inputTextField.text;
+        JoinRoom(roomStr);
+        textMesh.text = "Loading Room: " + roomStr;
+        //runner.JoinSessionLobby(SessionLobby.Shared);
 
-      
+        //bool foundRoom = false;
+        //string roomStr = inputTextField.text;
+        //for(int i = 0; i < sessionList.Count; i++)
+        //{
+        //    if (sessionList[i].Name.Equals(roomStr))
+        //        foundRoom = true;
+        //}
+        //if (foundRoom)
+        //{
+        //    JoinRoom(roomStr);
+        //}
+        //else
+        //{
+        //    CreateRoom(roomStr);
+        //}
+
     }
 
-    public void JoinRoom(int n)
+    public void JoinRoom(string str)
     {
         lobbyText.SetActive(true);
-        var str = "Room" + n;
-        PhotonNetwork.JoinRoom(str);
+        runner.StartGame(new StartGameArgs()
+        {
+            GameMode = GameMode.Shared,
+            SessionName = str
+        });
 
         textMesh.text = "Joining: " + str;
     }
     public void LeaveRoom()
     {
         lobbyText.SetActive(true);
-        PhotonNetwork.LeaveRoom();
+        //runner.leave
 
         textMesh.text = "Leaving Room...";
     }
 
-    public override void OnLeftRoom()
+    public void OnLeftRoom()
     {
         textMesh.text = "Room Left!";
     }
 
-    public override void OnJoinedRoom()
+    public void OnJoinedRoom()
     {
-        textMesh.text = "Sucessfully joined room: " + PhotonNetwork.CurrentRoom.Name;
+        textMesh.text = "Sucessfully joined room: " + runner.SessionInfo.Name;
+    }
+    public void OnCreatedRoom()
+    {
+        textMesh.text = "Sucessfully created room: " + runner.SessionInfo.Name;
     }
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
+    public void SetSessionList(NetworkRunner runner, List<SessionInfo> sList)
     {
-        textMesh.text = message;
+        Debug.Log("setSessionList");
+        sessionList = sList;
     }
 
     //private void setLobbyName(string s)
@@ -81,7 +116,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         if(timer < 0)
         {
             timer = 1;
-            playerCountTextMesh.text = "Player Count: "+ PhotonNetwork.CurrentRoom.PlayerCount;
+            playerCountTextMesh.text = "Player Count: "+ runner.SessionInfo.PlayerCount;
         }
     }
 }

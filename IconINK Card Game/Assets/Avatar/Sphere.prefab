@@ -49,7 +49,8 @@ MonoBehaviour:
   SortKey: 506135940
   ObjectInterest: 1
   Flags: 262145
-  NestedObjects: []
+  NestedObjects:
+  - {fileID: 3003162072207725630}
   NetworkedBehaviours:
   - {fileID: 2077000977094759583}
 --- !u!114 &2077000977094759583
@@ -67,7 +68,7 @@ MonoBehaviour:
   SyncScale: 0
   SyncParent: 0
   _autoAOIOverride: 0
-  DisableSharedModeInterpolation: 0
+  DisableSharedModeInterpolation: 1
 --- !u!1 &7635458757049314848
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +81,8 @@ GameObject:
   - component: {fileID: 9091733058997768711}
   - component: {fileID: 6177631971186776413}
   - component: {fileID: 506546209226480410}
+  - component: {fileID: 3003162072207725630}
+  - component: {fileID: 3497782578721187462}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -173,3 +176,37 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3003162072207725630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635458757049314848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1448824378
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 3497782578721187462}
+--- !u!114 &3497782578721187462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635458757049314848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 0
+  DisableSharedModeInterpolation: 1

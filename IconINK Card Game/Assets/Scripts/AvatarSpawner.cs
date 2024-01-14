@@ -4,12 +4,13 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 
-public class CubeSpawner : MonoBehaviour
+public class AvatarSpawner : MonoBehaviour
 {
+
     public GameObject RunnerObject;
     private NetworkRunner runner;
-    public GameObject prefabCube;
-    public GameObject test;
+    public GameObject prefabAvatar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,15 +20,17 @@ public class CubeSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //spawnCube();
-       
-        //Debug.Log(Fusion.NetworkRunner.GetRunnerForGameObject(gameObject).SessionInfo.PlayerCount);
+        
     }
 
-    public void spawnCube()
+    public void spawnAvatar()
     {
-        
-        NetworkObject go = runner.Spawn(prefabCube, transform.position, transform.rotation);
+       if(runner == null)
+        {
+            runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
+        }
+        NetworkObject go = runner.Spawn(prefabAvatar, transform.position, transform.rotation);
+        go.transform.parent = gameObject.transform;
         
     }
 

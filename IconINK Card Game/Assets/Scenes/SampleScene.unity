@@ -5180,7 +5180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RunnerObject: {fileID: 1869920639}
-  prefabCube: {fileID: 5611117101464514115, guid: 60d8922bf086e3844b8afb74934f66d5, type: 3}
+  prefabCube: {fileID: 1503710071845993437, guid: d2449cf02bec9d24bbd85eb1106d62aa, type: 3}
   test: {fileID: 1988479809}
 --- !u!4 &1988479811
 Transform:

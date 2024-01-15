@@ -28,7 +28,7 @@ public class CubeSpawner : MonoBehaviour
     {
         
         NetworkObject go = runner.Spawn(prefabCube, transform.position, transform.rotation);
-        
+        go.transform.parent = gameObject.transform;
     }
 
     public void connected()

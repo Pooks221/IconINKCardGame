@@ -50,7 +50,7 @@ public class AvatarSpawner : MonoBehaviour
         Vector3 newPosition = Vector3.Lerp(transform.position, go.transform.position, 5f * Time.deltaTime);
         
         go2.transform.position = newPosition;
-        reposition();
+        //reposition();
     }
 
     public void connected()

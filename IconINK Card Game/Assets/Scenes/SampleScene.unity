@@ -142,9 +142,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 1423421079
   ObjectInterest: 1
-  Flags: 262145
+  Flags: 786433
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 40919631}
   - {fileID: 40919624}
 --- !u!54 &40919623 stripped
 Rigidbody:
@@ -167,6 +168,17 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1
+--- !u!114 &40919631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5501373013097261976, guid: 60d8922bf086e3844b8afb74934f66d5, type: 3}
+  m_PrefabInstance: {fileID: 1264876141}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40919614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1867402b106e13e48afcd6a39633fad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &138770127
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +383,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 223974243}
   - {fileID: 223974236}
 --- !u!54 &223974235 stripped
 Rigidbody:
@@ -393,6 +406,17 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1
+--- !u!114 &223974243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5501373013097261976, guid: 60d8922bf086e3844b8afb74934f66d5, type: 3}
+  m_PrefabInstance: {fileID: 396542719}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1867402b106e13e48afcd6a39633fad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &242294519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,6 +1965,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 782628392}
   - {fileID: 782628385}
 --- !u!54 &782628384 stripped
 Rigidbody:
@@ -1963,6 +1988,17 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1
+--- !u!114 &782628392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5501373013097261976, guid: 60d8922bf086e3844b8afb74934f66d5, type: 3}
+  m_PrefabInstance: {fileID: 1998838142}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782628375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1867402b106e13e48afcd6a39633fad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &799326010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4857,6 +4893,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 1828601352}
   - {fileID: 1828601345}
 --- !u!54 &1828601344 stripped
 Rigidbody:
@@ -4879,6 +4916,17 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1
+--- !u!114 &1828601352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5501373013097261976, guid: 60d8922bf086e3844b8afb74934f66d5, type: 3}
+  m_PrefabInstance: {fileID: 1412013432}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828601335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1867402b106e13e48afcd6a39633fad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1869920639
 GameObject:
   m_ObjectHideFlags: 0

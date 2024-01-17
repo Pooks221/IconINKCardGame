@@ -24,6 +24,7 @@ public class CreateAndJoinRooms : MonoBehaviour
         lobbyText.SetActive(false);
         textMesh = lobbyText.GetComponent<TextMeshProUGUI>();
         playerCountTextMesh = PlayerCountText.GetComponent<TextMeshProUGUI>();
+        //CreateRoom("AutoCreateRoom");
     }
 
     public void CreateRoom(string str)

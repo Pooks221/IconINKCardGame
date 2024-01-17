@@ -10,6 +10,8 @@ public class CubeSpawner : MonoBehaviour
     private NetworkRunner runner;
     public GameObject prefabCube;
     public GameObject test;
+
+    private List<NetworkObject> allCubes = new List<NetworkObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class CubeSpawner : MonoBehaviour
     {
         
         NetworkObject go = runner.Spawn(prefabCube, transform.position, transform.rotation);
+        allCubes.Add(go);
         //go.transform.parent = gameObject.transform;
     }
 
@@ -35,5 +38,16 @@ public class CubeSpawner : MonoBehaviour
     {
         Debug.Log("Connected");
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
+    }
+
+    public void DeleteCubes()
+    {
+        Debug.Log("Delete:" + allCubes.Count);
+        for (int i = 0; i < allCubes.Count; i++)
+        {
+            Debug.Log("Deleted:"+i);
+            runner.Despawn(allCubes[i]);
+        }
+        allCubes.Clear();
     }
 }

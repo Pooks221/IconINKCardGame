@@ -12,7 +12,8 @@ public class DeckSpawner : MonoBehaviour
     public GameObject prefabCard;
     public Toggle deckToggle;
 
-    private int DECK_SIZE = 10;
+    private int DECK_VALUE_AMOUNT = 13;
+    private int DECK_SUIT_AMOUNT = 4;
 
     private NetworkObject[] deck;
     // Start is called before the first frame update
@@ -38,7 +39,7 @@ public class DeckSpawner : MonoBehaviour
     {
         if (deckToggle.isOn)
         {
-            SpawnDeck(DECK_SIZE);
+            SpawnDeck(DECK_SUIT_AMOUNT, DECK_VALUE_AMOUNT);
         }
         else
         {
@@ -46,12 +47,19 @@ public class DeckSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnDeck(int amount)
+    public void SpawnDeck(int suitAmount, int valueAmount)
     {
-        deck = new NetworkObject[amount];
-        for (int i = 0; i < amount; i++)
+        int deckSize = suitAmount * valueAmount;
+        int curCard = 0;
+        deck = new NetworkObject[deckSize];
+        for (int suit = 0; suit < suitAmount; suit++)
         {
-            deck[i] = spawnCard();
+            for (int value = 1; value <= valueAmount; value++)
+            {
+                deck[curCard] = spawnCard();
+                deck[curCard].GetComponent<Card>().setSuitAndValue(getSuit(suit), getValue(value));
+                curCard++;
+            }
         }
     }
     public void DeleteDeck()
@@ -65,9 +73,52 @@ public class DeckSpawner : MonoBehaviour
     }
     public NetworkObject spawnCard()
     {
-        Debug.Log(runner);
         NetworkObject go= runner.Spawn(prefabCard, transform.position, transform.rotation);
         return go;
-        //go.transform.parent = gameObject.transform;
+    }
+
+
+    private string getValue(int v)
+    {
+        string tempValue = v.ToString();
+        switch (v)
+        {
+            case 1:
+                tempValue = "Ace";
+                break;
+            case 11:
+                tempValue = "Jack";
+                break;
+            case 12:
+                tempValue = "Queen";
+                break;
+            case 13:
+                tempValue = "King";
+                break;
+            case 14:
+                tempValue = "Joker";
+                break;
+        }
+        return tempValue;
+    }
+    private string getSuit(int s)
+    {
+        string tempSuit = "Error";
+        switch (s)
+        {
+            case 0:
+                tempSuit = "Heart";
+                break;
+            case 1:
+                tempSuit = "Diamond";
+                break;
+            case 2:
+                tempSuit = "Spade";
+                break;
+            case 3:
+                tempSuit = "Club";
+                break;
+        }
+        return tempSuit;
     }
 }

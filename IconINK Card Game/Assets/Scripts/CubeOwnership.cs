@@ -42,7 +42,7 @@ public class CubeOwnership : NetworkBehaviour
 
     public void RemoveOwnership()
     {
-        Object.ReleaseStateAuthority();
+        //Object.ReleaseStateAuthority();
         gameObject.GetComponent<Renderer>().material.color = Color.red;
     }
 }

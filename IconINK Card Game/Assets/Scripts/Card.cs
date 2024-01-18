@@ -34,4 +34,22 @@ public class Card : MonoBehaviour
     {
         rb.useGravity = true;
     }
+
+    public void setSuit(string s)
+    {
+        suit = s;
+    }
+
+    public void setValue(string v)
+    {
+        value = v;
+    }
+
+    public void setSuitAndValue(string s, string v)
+    {
+        suit = s;
+        value = v;
+
+        Debug.Log("Card Spawned:" + value + " of " + suit);
+    }
 }

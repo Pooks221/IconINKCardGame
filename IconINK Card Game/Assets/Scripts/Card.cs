@@ -7,6 +7,9 @@ public class Card : MonoBehaviour
 
     private Rigidbody rb;
     private BoxCollider boxCollider;
+
+    private string suit = "None";
+    private string value= "0";
     // Start is called before the first frame update
     void Start()
     {

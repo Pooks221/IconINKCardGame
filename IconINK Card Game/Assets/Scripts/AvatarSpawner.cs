@@ -14,6 +14,7 @@ public class AvatarSpawner : MonoBehaviour
     private NetworkObject go2;
 
     // Start is called before the first frame update
+    //Comment to test git
     void Start()
     {
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);

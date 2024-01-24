@@ -14,6 +14,9 @@ public class DeckSpawner : MonoBehaviour
 
     private int DECK_VALUE_AMOUNT = 13;
     private int DECK_SUIT_AMOUNT = 4;
+    private bool TEST_MODE = false;
+
+    private float spawnModifier = 0;
 
     private NetworkObject[] deck;
     // Start is called before the first frame update
@@ -33,6 +36,11 @@ public class DeckSpawner : MonoBehaviour
     public void connected()
     {
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
+
+        if (TEST_MODE)
+        {
+            SpawnDeck(DECK_SUIT_AMOUNT, DECK_VALUE_AMOUNT);
+        }
     }
 
     public void ToggleDeck()
@@ -57,7 +65,7 @@ public class DeckSpawner : MonoBehaviour
             for (int value = 1; value <= valueAmount; value++)
             {
                 deck[curCard] = spawnCard();
-                deck[curCard].GetComponent<Card>().setSuitAndValue(getSuit(suit), getValue(value));
+                deck[curCard].GetComponent<Card>().RPC_setSuitAndValue(getSuit(suit), getValue(value));
                 curCard++;
             }
         }
@@ -73,7 +81,8 @@ public class DeckSpawner : MonoBehaviour
     }
     public NetworkObject spawnCard()
     {
-        NetworkObject go= runner.Spawn(prefabCard, transform.position, transform.rotation);
+        NetworkObject go= runner.Spawn(prefabCard, transform.position + new Vector3(0,spawnModifier,0), transform.rotation);
+        spawnModifier += .01f;
         return go;
     }
 

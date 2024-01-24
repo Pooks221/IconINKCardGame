@@ -18,8 +18,8 @@ public class DebugLogger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(gameObject.name);
-        Debug.Log("time:" + Time.time);
+        //Debug.Log(gameObject.name);
+        //Debug.Log("time:" + Time.time);
     }
 
     private void OnEnable()

@@ -17,6 +17,8 @@ public class CreateAndJoinRooms : MonoBehaviour
     private TextMeshProUGUI playerCountTextMesh;
     private List<SessionInfo> sessionList;
 
+    private bool TEST_MODE = false;
+
     private float timer = 0;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,10 @@ public class CreateAndJoinRooms : MonoBehaviour
         lobbyText.SetActive(false);
         textMesh = lobbyText.GetComponent<TextMeshProUGUI>();
         playerCountTextMesh = PlayerCountText.GetComponent<TextMeshProUGUI>();
-        //CreateRoom("AutoCreateRoom");
+        if (TEST_MODE)
+        {
+            CreateRoom("AutoCreateRoom");
+        }
     }
 
     public void CreateRoom(string str)

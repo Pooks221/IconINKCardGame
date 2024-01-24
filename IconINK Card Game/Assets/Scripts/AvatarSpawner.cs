@@ -36,7 +36,7 @@ public class AvatarSpawner : MonoBehaviour
         //}
     }
 
-    public void spawnAvatar()
+    public async void spawnAvatar()
     {
         
         if (runner == null)
@@ -45,10 +45,8 @@ public class AvatarSpawner : MonoBehaviour
         }
         NetworkObject go = runner.Spawn(prefabAvatar, transform.position, transform.rotation, runner.LocalPlayer);
         go.transform.SetParent(spawnerlocation);
-        go.transform.localRotation = Quaternion.identity;
-        go.transform.localPosition = Vector3.zero;
         //go.transform.parent = gameObject.transform;
-        //await Task.Delay(10000);
+        await Task.Delay(10000);
         //Vector3 newPosition = new Vector3(0, 0, 0);
         //go.transform.position = newPosition;
         //go.transform.SetParent(spawnerlocation);

@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -6643776661931245525}
   - component: {fileID: -5501373013097261976}
   m_Layer: 0
-  m_Name: Grab cube
+  m_Name: Grab cube 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 1465956334
+  SortKey: 321061923
   ObjectInterest: 1
   Flags: 786433
   NestedObjects: []

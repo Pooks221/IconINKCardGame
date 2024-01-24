@@ -6034,7 +6034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RunnerObject: {fileID: 1869920639}
-  prefabCard: {fileID: 5611117101464514115, guid: 2e09b3eff8b766247b488cbe11c87220, type: 3}
+  prefabCard: {fileID: 8145482322266697079, guid: 5a7091025fc3c5e4a8af680382cdd19e, type: 3}
   deckToggle: {fileID: 1664154934}
 --- !u!4 &1817938949
 Transform:

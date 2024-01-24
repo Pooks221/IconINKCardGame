@@ -5,7 +5,7 @@ using Fusion;
 using Fusion.Sockets;
 using UnityEngine.UI;
 
-public class DeckSpawner : MonoBehaviour
+public class DeckSpawner : NetworkBehaviour
 {
     public GameObject RunnerObject;
     private NetworkRunner runner;
@@ -75,9 +75,18 @@ public class DeckSpawner : MonoBehaviour
 
         for (int i = 0; i < deck.Length; i++)
         {
-            runner.Despawn(deck[i]);
+            RPC_DestroyCard(deck[i]);
         }
         deck = new NetworkObject[0];
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_DestroyCard(NetworkObject card)
+    {
+        if (card.HasStateAuthority)
+        {
+            runner.Despawn(card);
+        }
     }
     public NetworkObject spawnCard()
     {

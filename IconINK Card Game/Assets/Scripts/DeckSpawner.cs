@@ -47,12 +47,20 @@ public class DeckSpawner : NetworkBehaviour
     {
         if (deckToggle.isOn)
         {
+            RPC_setDeckToggle(true);
             SpawnDeck(DECK_SUIT_AMOUNT, DECK_VALUE_AMOUNT);
         }
         else
         {
+            RPC_setDeckToggle(false);
             DeleteDeck();
         }
+    }
+
+    //[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_setDeckToggle(bool isOn)
+    {
+        deckToggle.isOn = isOn;
     }
 
     public void SpawnDeck(int suitAmount, int valueAmount)
@@ -80,7 +88,7 @@ public class DeckSpawner : NetworkBehaviour
         deck = new NetworkObject[0];
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
+    //[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RPC_DestroyCard(NetworkObject card)
     {
         if (card.HasStateAuthority)

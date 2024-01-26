@@ -60,8 +60,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06292415, y: 0.0014008284, z: 0.08857298}
-  m_Center: {x: -0.0004297495, y: -0.0004056394, z: -0.00006604195}
+  m_Size: {x: 0.065, y: 0.001, z: 0.09}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4021660370608907486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8145482322266697079}
   serializedVersion: 4
-  m_Mass: 0.01
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -164,7 +164,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -197,11 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1464721f2283eb14e94a33e812b47be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactableView: {fileID: 8649900012368939612, guid: 2e09b3eff8b766247b488cbe11c87220, type: 3}
+  _interactableView: {fileID: -3416854468272794721}
   _whenHover:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -5501373013097261976, guid: 2e09b3eff8b766247b488cbe11c87220, type: 3}
+      - m_Target: {fileID: -3033882919280769628}
         m_TargetAssemblyTypeName: CubeOwnership, Assembly-CSharp
         m_MethodName: RequestOwnership
         m_Mode: 1
@@ -216,7 +216,7 @@ MonoBehaviour:
   _whenUnhover:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -5501373013097261976, guid: 2e09b3eff8b766247b488cbe11c87220, type: 3}
+      - m_Target: {fileID: -3033882919280769628}
         m_TargetAssemblyTypeName: CubeOwnership, Assembly-CSharp
         m_MethodName: RemoveOwnership
         m_Mode: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7746540286333088877, guid: 2e09b3eff8b766247b488cbe11c87220, type: 3}
+      - m_Target: {fileID: 3500651590672419899}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
         m_MethodName: onGrab
         m_Mode: 1
@@ -246,7 +246,7 @@ MonoBehaviour:
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7746540286333088877, guid: 2e09b3eff8b766247b488cbe11c87220, type: 3}
+      - m_Target: {fileID: 3500651590672419899}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
         m_MethodName: onRelease
         m_Mode: 1
@@ -296,6 +296,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backMaterial: {fileID: 1258591713119523280}
   frontMaterial: {fileID: 7519673449084299819}
+  gravity: -80
+  throwMultiplier: 120
+  maxThrowMagnitude: 80
 --- !u!1001 &8195590477023494277
 PrefabInstance:
   m_ObjectHideFlags: 0

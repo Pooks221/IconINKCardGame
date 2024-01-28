@@ -5,11 +5,18 @@ using UnityEngine.UI;
 
 public class setskybox1 : MonoBehaviour
 {
-    private Material defaultSkybox;
+    public OVRPassthroughLayer passthrough;
+    public Material defaultSkybox;
+    public Material skybox1;
+    public Material skybox2;
+    public Camera skyboxCamera;
+    public bool test;
+
 
     private void Start()
     {
-        defaultSkybox = RenderSettings.skybox;
+        passthrough.enabled = enabled;
+        //defaultSkybox = RenderSettings.skybox;
     }
 
     public void SetSkyboxToNone()
@@ -20,5 +27,33 @@ public class setskybox1 : MonoBehaviour
     public void SetSkyboxToDefault()
     {
         RenderSettings.skybox = defaultSkybox;
+
     }
+
+    public void togglePassthrough()
+    {
+        passthrough.hidden = !passthrough.hidden;
+        if (passthrough.hidden)
+        {
+            skyboxCamera.enabled = enabled;
+            RenderSettings.skybox = defaultSkybox;
+            passthrough.enabled = !enabled;
+        }
+        if (!passthrough.hidden)
+        {
+            skyboxCamera.enabled = !enabled;
+            passthrough.enabled = enabled;
+        }
+    }
+
+    public void SetSkybox1()
+    {
+        RenderSettings.skybox = skybox1;
+    }
+
+    public void SetSkybox2()
+    {
+        RenderSettings.skybox = skybox2;
+    }
+
 }

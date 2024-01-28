@@ -43,7 +43,7 @@
     },
     "com.meta.xr.sdk.avatars": {
       "version": "24.0.1",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.meta.xr.sdk.platform": "59.0.0",
@@ -308,7 +308,7 @@
     },
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.10",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.vr": "1.0.0",

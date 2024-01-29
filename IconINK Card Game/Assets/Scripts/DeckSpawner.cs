@@ -35,6 +35,7 @@ public class DeckSpawner : NetworkBehaviour
     
     public void connected()
     {
+        Debug.Log("test");
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
 
         if (TEST_MODE)

@@ -17,6 +17,8 @@ public class setskybox1 : MonoBehaviour
     {
         passthrough.enabled = enabled;
         //defaultSkybox = RenderSettings.skybox;
+        RenderSettings.skybox = defaultSkybox;
+        skyboxCamera.enabled = !enabled;
     }
 
     public void SetSkyboxToNone()

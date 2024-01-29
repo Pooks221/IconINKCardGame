@@ -44,8 +44,12 @@ public class AvatarSpawner : MonoBehaviour
             runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
         }
         NetworkObject go = runner.Spawn(prefabAvatar, transform.position, transform.rotation, runner.LocalPlayer);
+        var lipSync = FindObjectOfType<OvrAvatarLipSyncContext>();
+        lipSync.CaptureAudio = true;
+        //gameObject.GetComponent<go>().SetLipSync(lipSync);
         go.transform.SetParent(spawnerlocation);
-        //go.transform.parent = gameObject.transform;
+        go.transform.parent = gameObject.transform;
+
         await Task.Delay(10000);
         //Vector3 newPosition = new Vector3(0, 0, 0);
         //go.transform.position = newPosition;

@@ -50,6 +50,14 @@ public class AvatarSpawner : MonoBehaviour
         go.transform.SetParent(spawnerlocation);
         go.transform.parent = gameObject.transform;
 
+        //link sample avatar entity
+        GameObject avatarSDK = GameObject.Find("AvatarSdkManagerMeta");
+        go.GetComponent<SampleAvatarEntity>().SetBodyTracking(avatarSDK.GetComponent<SampleInputManager>());
+        go.GetComponent<SampleAvatarEntity>().SetFacePoseProvider(avatarSDK.GetComponent<SampleFacePoseBehavior>());
+        go.GetComponent<SampleAvatarEntity>().SetEyePoseProvider(avatarSDK.GetComponent<SampleEyePoseBehavior>());
+        go.GetComponent<SampleAvatarEntity>().SetLipSync(GameObject.Find("LipSyncInput").GetComponent<OvrAvatarLipSyncBehavior>());
+
+
         await Task.Delay(10000);
         //Vector3 newPosition = new Vector3(0, 0, 0);
         //go.transform.position = newPosition;

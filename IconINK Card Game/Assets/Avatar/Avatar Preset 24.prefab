@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _creationInfo:
-    features: 342
+    features: 102
     renderFilters:
       lodFlags: -1
       manifestationFlags: 2
@@ -99,7 +99,7 @@ MonoBehaviour:
   MotionSmoothingSettings: 0
   _hidden: 0
   useRenderLods: 1
-  _isLocal: 1
+  _isLocal: 0
   _loadUserFromCdn: 0
   _deferLoading: 0
   _assets:
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 1664339929
   ObjectInterest: 1
-  Flags: 262145
+  Flags: 786433
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: -397465881339541103}
@@ -141,6 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SyncScale: 0
-  SyncParent: 0
+  SyncParent: 1
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1

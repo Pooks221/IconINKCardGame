@@ -48,7 +48,7 @@ public class AvatarSpawner : MonoBehaviour
         lipSync.CaptureAudio = true;
         //gameObject.GetComponent<go>().SetLipSync(lipSync);
         go.transform.SetParent(spawnerlocation);
-        go.transform.parent = gameObject.transform;
+        //go.transform.parent = gameObject.transform;
 
         //link sample avatar entity
         GameObject avatarSDK = GameObject.Find("AvatarSdkManagerMeta");
@@ -59,6 +59,7 @@ public class AvatarSpawner : MonoBehaviour
 
 
         await Task.Delay(10000);
+        
         //Vector3 newPosition = new Vector3(0, 0, 0);
         //go.transform.position = newPosition;
         //go.transform.SetParent(spawnerlocation);

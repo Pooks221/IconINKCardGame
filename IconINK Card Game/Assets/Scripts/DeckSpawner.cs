@@ -148,4 +148,9 @@ public class DeckSpawner : NetworkBehaviour
         }
         return tempSuit;
     }
+
+    public void PickOne()
+    {
+        SpawnDeck(1, 1);
+    }
 }

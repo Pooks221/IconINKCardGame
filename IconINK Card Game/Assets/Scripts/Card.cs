@@ -4,6 +4,8 @@ using UnityEngine;
 using Fusion;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading.Tasks;
+using UnityEngine.Events;
 
 public class Card : NetworkBehaviour
 {
@@ -15,12 +17,19 @@ public class Card : NetworkBehaviour
     public float gravity = -5;
     public float throwMultiplier = 1;
     public float maxThrowMagnitude = 10;
+    //public UnityEvent<GameObject> toHand;
+    
 
     private string suit = "None";
     private string value= "0";
     private bool gravityActive = true;
     private Vector3 lastPos = Vector3.zero;
     private bool released = false;
+    private bool inLocation;
+    private Vector3 handLocation;
+    private Quaternion handRotation;
+
+    Renderer rend;
 
     private const int DELTATIME_MODIFIER = 1000;
     // Start is called before the first frame update
@@ -32,6 +41,7 @@ public class Card : NetworkBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         boxCollider = gameObject.GetComponent<BoxCollider>();
         lastPos = transform.position;
+        
     }
 
     // Update is called once per frame
@@ -63,7 +73,7 @@ public class Card : NetworkBehaviour
         //RPC_test();
 
         //if we want the card to be able to push other cards while a player is holding it, the boxcollider should not be turned off.
-        boxCollider.enabled = false;
+       // boxCollider.enabled = false;
     }
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void RPC_test()
@@ -71,13 +81,27 @@ public class Card : NetworkBehaviour
         setCardToJoker();
     }
 
-    public void onRelease()
+    public async void onRelease()
     {
         released = true;
-
-
-        gravityActive = true;
-        boxCollider.enabled = true;
+        if (!inLocation)
+        {
+            rb.isKinematic = false;
+            gravityActive = true;
+            boxCollider.enabled = true;
+        }
+        else
+        {
+            gravityActive = false;
+            await Task.Delay(10);
+            rb.isKinematic = true;
+            await Task.Delay(50);
+            transform.position = (handLocation + new Vector3(0f,0.1f,0f));
+            transform.rotation = (handRotation);
+            await Task.Delay(50);
+            rend.enabled = false;
+        }
+        
     }
 
     public void setSuit(string s)
@@ -149,4 +173,29 @@ public class Card : NetworkBehaviour
         string matName = "CardMaterials/Joker";
         frontMaterial.material = (Resources.Load(matName, typeof(Material)) as Material);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Hand1"))
+        {
+            rend = other.GetComponent<Renderer>();
+            rend.enabled = true;
+            inLocation = true;
+            handLocation = other.transform.position;
+            handRotation = other.transform.rotation;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Hand1"))
+        {
+            rend = other.GetComponent<Renderer>();
+            rend.enabled = false;
+            inLocation = false;
+        }
+    }
+
+
 }

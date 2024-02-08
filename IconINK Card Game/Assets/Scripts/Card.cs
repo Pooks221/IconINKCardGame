@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.Events;
+using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 
 public class Card : NetworkBehaviour
 {
@@ -19,6 +21,8 @@ public class Card : NetworkBehaviour
     public float maxThrowMagnitude = 10;
     public GameObject cardBack;
     public GameObject cardFace;
+    public HandGrabInteractable handGrab;
+    public Grabbable grabbable;
     //public UnityEvent<GameObject> toHand;
 
 
@@ -72,22 +76,24 @@ public class Card : NetworkBehaviour
 
     public void hideInCardPile()
     {
-        Debug.Log("hideInPile");
-        boxCollider.enabled = false;
+        //boxCollider.enabled = false;
         gravityActive = false;
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
         cardBack.GetComponent<Renderer>().enabled = false;
         cardFace.GetComponent<Renderer>().enabled = false;
+        grabbable.enabled = false;
+        handGrab.enabled = false;
     }
     public void showCardOnPile(GameObject pile)
     {
-        Debug.Log("showOnPile");
         boxCollider.enabled = true;
         gravityActive = true;
         rb.isKinematic = false;
         cardBack.GetComponent<Renderer>().enabled = true;
         cardFace.GetComponent<Renderer>().enabled = true;
-        transform.position = pile.transform.position;
+        grabbable.enabled = true;
+        handGrab.enabled = true;
+        transform.position = pile.transform.position+new Vector3(0,0.01f,0);
         transform.rotation = pile.transform.rotation;
     }
 
@@ -97,7 +103,7 @@ public class Card : NetworkBehaviour
         //RPC_test();
 
         //if we want the card to be able to push other cards while a player is holding it, the boxcollider should not be turned off.
-        boxCollider.enabled = false;
+        //boxCollider.enabled = false;
     }
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void RPC_test()

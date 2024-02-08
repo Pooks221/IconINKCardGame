@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8557176644779242838}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: CardCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -447,6 +447,8 @@ MonoBehaviour:
   maxThrowMagnitude: 80
   cardBack: {fileID: 5254361771826896152}
   cardFace: {fileID: 866057216742559257}
+  handGrab: {fileID: -3416854468272794721}
+  grabbable: {fileID: 4021660370608907486}
 --- !u!1001 &8195590477023494277
 PrefabInstance:
   m_ObjectHideFlags: 0

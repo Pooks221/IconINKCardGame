@@ -8,6 +8,7 @@ TagManager:
   - Vector
   - Card
   - Hand1
+  - CardCollision
   layers:
   - Default
   - TransparentFX

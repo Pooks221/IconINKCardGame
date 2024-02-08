@@ -17,8 +17,10 @@ public class Card : NetworkBehaviour
     public float gravity = -5;
     public float throwMultiplier = 1;
     public float maxThrowMagnitude = 10;
+    public GameObject cardBack;
+    public GameObject cardFace;
     //public UnityEvent<GameObject> toHand;
-    
+
 
     private string suit = "None";
     private string value= "0";
@@ -41,7 +43,8 @@ public class Card : NetworkBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         boxCollider = gameObject.GetComponent<BoxCollider>();
         lastPos = transform.position;
-        
+
+
     }
 
     // Update is called once per frame
@@ -67,13 +70,34 @@ public class Card : NetworkBehaviour
         }
     }
 
+    public void hideInCardPile()
+    {
+        Debug.Log("hideInPile");
+        boxCollider.enabled = false;
+        gravityActive = false;
+        rb.isKinematic = true;
+        cardBack.GetComponent<Renderer>().enabled = false;
+        cardFace.GetComponent<Renderer>().enabled = false;
+    }
+    public void showCardOnPile(GameObject pile)
+    {
+        Debug.Log("showOnPile");
+        boxCollider.enabled = true;
+        gravityActive = true;
+        rb.isKinematic = false;
+        cardBack.GetComponent<Renderer>().enabled = true;
+        cardFace.GetComponent<Renderer>().enabled = true;
+        transform.position = pile.transform.position;
+        transform.rotation = pile.transform.rotation;
+    }
+
     public void onGrab()
     {
         gravityActive = false;
         //RPC_test();
 
         //if we want the card to be able to push other cards while a player is holding it, the boxcollider should not be turned off.
-       // boxCollider.enabled = false;
+        boxCollider.enabled = false;
     }
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void RPC_test()
@@ -119,7 +143,7 @@ public class Card : NetworkBehaviour
         suit = s;
         value = v;
 
-        Debug.Log("Card Spawned:" + value + " of " + suit);
+        //Debug.Log("Card Spawned:" + value + " of " + suit);
 
         string matName = "CardMaterials/";
         switch (s)

@@ -445,21 +445,8 @@ MonoBehaviour:
   gravity: -80
   throwMultiplier: 120
   maxThrowMagnitude: 80
-  toHand:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8145482322266697079}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  cardBack: {fileID: 5254361771826896152}
+  cardFace: {fileID: 866057216742559257}
 --- !u!1001 &8195590477023494277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -528,9 +515,19 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2590363470323619399}
   m_SourcePrefab: {fileID: 100100000, guid: f1589aad0aaa7df488967823c275e2c0, type: 3}
+--- !u!1 &866057216742559257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9059074689352453788, guid: f1589aad0aaa7df488967823c275e2c0, type: 3}
+  m_PrefabInstance: {fileID: 8195590477023494277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1258591713119523280 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6974945951290102101, guid: f1589aad0aaa7df488967823c275e2c0, type: 3}
+  m_PrefabInstance: {fileID: 8195590477023494277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5254361771826896152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4131956093031882141, guid: f1589aad0aaa7df488967823c275e2c0, type: 3}
   m_PrefabInstance: {fileID: 8195590477023494277}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &7519673449084299819 stripped

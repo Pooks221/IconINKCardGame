@@ -104,7 +104,6 @@ public class CreateAndJoinRooms : MonoBehaviour
 
     public void SetSessionList(NetworkRunner runner, List<SessionInfo> sList)
     {
-        Debug.Log("setSessionList");
         sessionList = sList;
     }
 

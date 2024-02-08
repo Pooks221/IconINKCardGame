@@ -4,21 +4,19 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class DeckSpawner : NetworkBehaviour
 {
     public GameObject RunnerObject;
     private NetworkRunner runner;
-    public GameObject prefabCard;
+    public GameObject prefabDeck;
     public Toggle deckToggle;
-
-    private int DECK_VALUE_AMOUNT = 13;
-    private int DECK_SUIT_AMOUNT = 4;
     private bool TEST_MODE = false;
 
     private float spawnModifier = 0;
 
-    private NetworkObject[] deck;
+    private List<NetworkObject> deckList = new List<NetworkObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +33,11 @@ public class DeckSpawner : NetworkBehaviour
     
     public void connected()
     {
-        Debug.Log("test");
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
 
         if (TEST_MODE)
         {
-            SpawnDeck(DECK_SUIT_AMOUNT, DECK_VALUE_AMOUNT);
+            SpawnDeck();
         }
     }
 
@@ -49,12 +46,12 @@ public class DeckSpawner : NetworkBehaviour
         if (deckToggle.isOn)
         {
             RPC_setDeckToggle(true);
-            SpawnDeck(DECK_SUIT_AMOUNT, DECK_VALUE_AMOUNT);
+            SpawnDeck();
         }
         else
         {
             RPC_setDeckToggle(false);
-            DeleteDeck();
+            RPC_DeleteDeck(deckList[0]);
         }
     }
 
@@ -63,94 +60,26 @@ public class DeckSpawner : NetworkBehaviour
     {
         deckToggle.isOn = isOn;
     }
-
-    public void SpawnDeck(int suitAmount, int valueAmount)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_DeleteDeck(NetworkObject deckObj)
     {
-        int deckSize = suitAmount * valueAmount;
-        int curCard = 0;
-        deck = new NetworkObject[deckSize];
-        for (int suit = 0; suit < suitAmount; suit++)
-        {
-            for (int value = 1; value <= valueAmount; value++)
-            {
-                deck[curCard] = spawnCard();
-                deck[curCard].GetComponent<Card>().RPC_setSuitAndValue(getSuit(suit), getValue(value));
-                curCard++;
-            }
-        }
+        deckObj.GetComponent<Deck>().DestroyDeck();
+        deckList.Remove(deckObj);
     }
-    public void DeleteDeck()
+    public void resetDeck()
     {
-
-        for (int i = 0; i < deck.Length; i++)
-        {
-            RPC_DestroyCard(deck[i]);
-        }
-        deck = new NetworkObject[0];
+        deckList[0].GetComponent<Deck>().ShuffleDeck();
     }
 
-    //[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RPC_DestroyCard(NetworkObject card)
+    private async void SpawnDeck()
     {
-        if (card.HasStateAuthority)
-        {
-            runner.Despawn(card);
-        }
-    }
-    public NetworkObject spawnCard()
-    {
-        NetworkObject go= runner.Spawn(prefabCard, transform.position + new Vector3(0,spawnModifier,0), transform.rotation);
-        spawnModifier += .01f;
-        return go;
+        deckList.Add(runner.Spawn(prefabDeck, transform.position, transform.rotation));
+        await Task.Delay(1000);
+        deckList[deckList.Count-1].GetComponent<Deck>().SpawnDeck();
     }
 
-
-    private string getValue(int v)
-    {
-        string tempValue = v.ToString();
-        switch (v)
-        {
-            case 1:
-                tempValue = "Ace";
-                break;
-            case 11:
-                tempValue = "Jack";
-                break;
-            case 12:
-                tempValue = "Queen";
-                break;
-            case 13:
-                tempValue = "King";
-                break;
-            case 14:
-                tempValue = "Joker";
-                break;
-        }
-        return tempValue;
-    }
-    private string getSuit(int s)
-    {
-        string tempSuit = "Error";
-        switch (s)
-        {
-            case 0:
-                tempSuit = "Heart";
-                break;
-            case 1:
-                tempSuit = "Diamond";
-                break;
-            case 2:
-                tempSuit = "Spade";
-                break;
-            case 3:
-                tempSuit = "Club";
-                break;
-        }
-        return tempSuit;
-    }
-
-    public void PickOne()
-    {
-        SpawnDeck(1, 1);
-    }
+    //public void PickOne()
+    //{
+    //    SpawnDeck(1, 1);
+    //}
 }

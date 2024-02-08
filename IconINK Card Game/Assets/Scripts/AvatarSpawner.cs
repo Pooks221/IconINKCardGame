@@ -80,7 +80,6 @@ public class AvatarSpawner : MonoBehaviour
 
     public void connected()
     {
-        Debug.Log("Connected");
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
     }
 }

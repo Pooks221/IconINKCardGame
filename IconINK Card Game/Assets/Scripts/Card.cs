@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using Fusion.Sockets;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
@@ -34,6 +35,8 @@ public class Card : NetworkBehaviour
     private bool inLocation;
     private Vector3 handLocation;
     private Quaternion handRotation;
+    private GameObject ObjectToSend;
+    private bool inHand = false;
 
     Renderer rend;
 
@@ -119,6 +122,9 @@ public class Card : NetworkBehaviour
             rb.isKinematic = false;
             gravityActive = true;
             boxCollider.enabled = true;
+            inHand = false;
+            HandManager handM = GameObject.Find("Hand1").GetComponent<HandManager>();
+            handM.DepartCard(gameObject.GetComponent<NetworkObject>());
         }
         else
         {
@@ -126,10 +132,14 @@ public class Card : NetworkBehaviour
             await Task.Delay(10);
             rb.isKinematic = true;
             await Task.Delay(50);
-            transform.position = (handLocation + new Vector3(0f,0.1f,0f));
-            transform.rotation = (handRotation);
+            //transform.position = (handLocation + new Vector3(0f,0.1f,0f));
+            //transform.rotation = (handRotation);
             await Task.Delay(50);
             rend.enabled = false;
+            HandManager handM = GameObject.Find("Hand1").GetComponent<HandManager>();
+            handM.RecieveCard(gameObject.GetComponent<NetworkObject>());
+            inHand = true;
+            
         }
         
     }

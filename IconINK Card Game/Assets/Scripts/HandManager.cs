@@ -88,4 +88,9 @@ public class HandManager : MonoBehaviour
         }*/
 
     }
+
+    public void ResetHand()
+    {
+        CardsInHand = new List<NetworkObject> { };
+    }
 }

@@ -37,6 +37,7 @@ public class Card : NetworkBehaviour
     private Quaternion handRotation;
     private GameObject ObjectToSend;
     private bool inHand = false;
+    private bool hoverPosition = false;
 
     Renderer rend;
 
@@ -237,5 +238,30 @@ public class Card : NetworkBehaviour
         }
     }
 
+    public void HighlightCard()
+    {
+        if (inHand)
+        {
+            if (!hoverPosition)
+            {
+                transform.position = (transform.position + new Vector3(0f, 0.01f, 0f));
+                hoverPosition = true;
+            }
+        
+        }
+    }
+
+    public void UnHighlightCard()
+    {
+        if (inHand)
+        {
+            if (hoverPosition)
+            {
+                transform.position = (transform.position + new Vector3(0f, -0.01f, 0f));
+                hoverPosition = false;
+            }
+            
+        }
+    }
 
 }

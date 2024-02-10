@@ -15,6 +15,7 @@ public class HandManager : MonoBehaviour
     public Transform Pos4;
     public Transform Pos5;
     public GameObject Halo;
+   
 
 
     private void Start()
@@ -25,21 +26,29 @@ public class HandManager : MonoBehaviour
 
     public void RecieveCard(NetworkObject card)
     {
-        Pos3.position = (Pos3.position + new Vector3(-0.015f, 0, 0));
-        CardsInHand.Add(card);
-        ReorderCards();
-        
-
+        if (!CardsInHand.Contains(card))
+        {
+            Pos3.position = (Pos3.position + new Vector3(-0.01f, 0, 0));
+            CardsInHand.Add(card);
+            ReorderCards();
+        }
+        else
+        {
+            CardsInHand.Remove(card);
+            CardsInHand.Add(card);
+            ReorderCards();
+        }
+ 
     }
 
     public void DepartCard(NetworkObject card)
     {
         if (CardsInHand.Contains(card))
         {
-            Pos3.position = (Pos3.position + new Vector3(0.015f, 0, 0));
-            CardsInHand.Remove(card);
-            ReorderCards();
-            
+                Pos3.position = (Pos3.position + new Vector3(0.01f, 0, 0));
+                CardsInHand.Remove(card);
+                ReorderCards();
+  
         }
     }
 
@@ -51,7 +60,7 @@ public class HandManager : MonoBehaviour
             foreach (var item in CardsInHand){
                 //CardsInHand.IndexOf(item)
                 
-                item.transform.position = (Pos3.position + new Vector3(CardsInHand.IndexOf(item) * 0.015f, 0, CardsInHand.IndexOf(item) * -0.001f) );
+                item.transform.position = (Pos3.position + new Vector3(CardsInHand.IndexOf(item) * 0.02f, 0, CardsInHand.IndexOf(item) * -0.001f) );
                 item.transform.rotation = Pos3.rotation;
             }
             //CardsInHand[0].transform.position = Pos1.position;

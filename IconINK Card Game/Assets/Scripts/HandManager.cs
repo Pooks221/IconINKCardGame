@@ -15,12 +15,13 @@ public class HandManager : MonoBehaviour
     public Transform Pos4;
     public Transform Pos5;
     public GameObject Halo;
-   
+    public AudioSource sfx;
 
+    private Vector3 startingPos;
 
     private void Start()
     {
-
+        startingPos = Pos3.localPosition;
         Halo.GetComponent<Renderer>().enabled = false;
     }
 
@@ -28,7 +29,7 @@ public class HandManager : MonoBehaviour
     {
         if (!CardsInHand.Contains(card))
         {
-            Pos3.position = (Pos3.position + new Vector3(-0.01f, 0, 0));
+            Pos3.localPosition = (Pos3.localPosition + new Vector3(-0.01f, 0, 0));
             CardsInHand.Add(card);
             ReorderCards();
         }
@@ -45,7 +46,7 @@ public class HandManager : MonoBehaviour
     {
         if (CardsInHand.Contains(card))
         {
-                Pos3.position = (Pos3.position + new Vector3(0.01f, 0, 0));
+                Pos3.localPosition = (Pos3.localPosition + new Vector3(0.01f, 0, 0));
                 CardsInHand.Remove(card);
                 ReorderCards();
   
@@ -60,8 +61,9 @@ public class HandManager : MonoBehaviour
             foreach (var item in CardsInHand){
                 //CardsInHand.IndexOf(item)
                 
-                item.transform.position = (Pos3.position + new Vector3(CardsInHand.IndexOf(item) * 0.02f, 0, CardsInHand.IndexOf(item) * -0.001f) );
+                item.transform.localPosition = (Pos3.localPosition + new Vector3(CardsInHand.IndexOf(item) * 0.02f, 0, CardsInHand.IndexOf(item) * -0.001f) );
                 item.transform.rotation = Pos3.rotation;
+                sfx.Play();
             }
             //CardsInHand[0].transform.position = Pos1.position;
             //CardsInHand[0].transform.rotation = Pos1.rotation;
@@ -92,5 +94,6 @@ public class HandManager : MonoBehaviour
     public void ResetHand()
     {
         CardsInHand = new List<NetworkObject> { };
+        Pos3.localPosition = startingPos;
     }
 }

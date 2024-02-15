@@ -38,6 +38,8 @@ public class Card : NetworkBehaviour
     private GameObject ObjectToSend;
     private bool inHand = false;
     private bool hoverPosition = false;
+    private string Hand = "";
+    private AudioSource sfx;
 
     Renderer rend;
 
@@ -104,6 +106,7 @@ public class Card : NetworkBehaviour
     public void onGrab()
     {
         gravityActive = false;
+        transform.parent = null;
         //RPC_test();
 
         //if we want the card to be able to push other cards while a player is holding it, the boxcollider should not be turned off.
@@ -124,7 +127,7 @@ public class Card : NetworkBehaviour
             gravityActive = true;
             boxCollider.enabled = true;
             inHand = false;
-            HandManager handM = GameObject.Find("Hand1").GetComponent<HandManager>();
+            HandManager handM = GameObject.Find(Hand).GetComponent<HandManager>();
             handM.DepartCard(gameObject.GetComponent<NetworkObject>());
         }
         else
@@ -137,10 +140,11 @@ public class Card : NetworkBehaviour
             //transform.rotation = (handRotation);
             await Task.Delay(50);
             rend.enabled = false;
-            HandManager handM = GameObject.Find("Hand1").GetComponent<HandManager>();
-            handM.RecieveCard(gameObject.GetComponent<NetworkObject>());
             inHand = true;
-            
+            HandManager handM = GameObject.Find(Hand).GetComponent<HandManager>();
+            transform.parent = handM.transform;
+            transform.localPosition = Vector3.zero;
+            handM.RecieveCard(gameObject.GetComponent<NetworkObject>());
         }
         
     }
@@ -224,6 +228,10 @@ public class Card : NetworkBehaviour
             inLocation = true;
             handLocation = other.transform.position;
             handRotation = other.transform.rotation;
+            Hand = other.transform.parent.gameObject.name;
+            Debug.Log("hand name: " + Hand);
+            sfx = other.GetComponent<AudioSource>();
+            sfx.Play();
         }
 
     }
@@ -235,6 +243,8 @@ public class Card : NetworkBehaviour
             rend = other.GetComponent<Renderer>();
             rend.enabled = false;
             inLocation = false;
+            Hand = other.transform.parent.gameObject.name;
+            Debug.Log("hand name: " + Hand);
         }
     }
 

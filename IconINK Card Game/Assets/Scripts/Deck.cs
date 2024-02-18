@@ -9,7 +9,7 @@ public class Deck : NetworkBehaviour
     public GameObject cardPrefab;
 
 
-    private int DECK_VALUE_AMOUNT = 3;
+    private int DECK_VALUE_AMOUNT = 13;
     private int DECK_SUIT_AMOUNT = 4;
     private float spawnModifier = 0;
     private NetworkRunner runner;
@@ -50,6 +50,7 @@ public class Deck : NetworkBehaviour
                 curCard++;
             }
         }
+        gameObject.GetComponent<CardPile>().setCardPile(new List<NetworkObject>(cardList));
     }
 
     //[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
@@ -70,12 +71,12 @@ public class Deck : NetworkBehaviour
     }
     public NetworkObject spawnCard()
     {
-        NetworkObject go = runner.Spawn(cardPrefab, transform.position + new Vector3(0, spawnModifier, 0), transform.rotation);
+        NetworkObject go = runner.Spawn(cardPrefab, transform.position, transform.rotation);
         spawnModifier += .01f;
         return go;
     }
 
-    public void ShuffleDeck()
+    public void ResetDeck()
     {
         List<NetworkObject> tempList = new List<NetworkObject>(cardList);
         cardList.Clear();
@@ -83,10 +84,30 @@ public class Deck : NetworkBehaviour
         {
             int rnd = Mathf.FloorToInt(Random.Range(0, tempList.Count));
             cardList.Add(tempList[rnd]);
-            tempList[rnd].transform.position = this.transform.position;
-            tempList[rnd].transform.rotation = this.transform.rotation;
+            //tempList[rnd].transform.position = this.transform.position;
+            //tempList[rnd].transform.rotation = this.transform.rotation;
+            //tempList[rnd].transform.GetComponent<Card>().showCardOnPile(gameObject);
             tempList.RemoveAt(rnd);
         }
+        gameObject.GetComponent<CardPile>().setCardPile(new List<NetworkObject>(cardList));
+    }
+    public void ShuffleDeck(List<NetworkObject> discardList)
+    {
+        List<NetworkObject> cardsStillInDeck = new List<NetworkObject>(gameObject.GetComponent<CardPile>().getCardList());
+        List<NetworkObject> tempCards = new List<NetworkObject>();
+        for (int i=0; i < discardList.Count; i++)
+        {
+            cardsStillInDeck.Add(discardList[i]);
+        }
+        while (cardsStillInDeck.Count > 0)
+        {
+            int rnd = Mathf.FloorToInt(Random.Range(0, cardsStillInDeck.Count));
+            tempCards.Add(cardsStillInDeck[rnd]);
+            //cardsStillInDeck[rnd].transform.position = this.transform.position;
+            //cardsStillInDeck[rnd].transform.rotation = this.transform.rotation;
+            cardsStillInDeck.RemoveAt(rnd);
+        }
+        gameObject.GetComponent<CardPile>().setCardPile(tempCards);
     }
 
     private string getValue(int v)

@@ -80,21 +80,26 @@ public class Card : NetworkBehaviour
         }
     }
 
-    public void hideInCardPile()
+    public void hideInCardPile(GameObject pile)
     {
-        //boxCollider.enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         gravityActive = false;
-        //rb.isKinematic = true;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        gameObject.transform.position = pile.transform.position + new Vector3(0, 0.01f, 0);
+        gameObject.transform.rotation = pile.transform.rotation;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
         cardBack.GetComponent<Renderer>().enabled = false;
         cardFace.GetComponent<Renderer>().enabled = false;
         grabbable.enabled = false;
         handGrab.enabled = false;
+        transform.parent = pile.transform;
     }
     public void showCardOnPile(GameObject pile)
     {
-        boxCollider.enabled = true;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
         gravityActive = true;
-        rb.isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         cardBack.GetComponent<Renderer>().enabled = true;
         cardFace.GetComponent<Renderer>().enabled = true;
         grabbable.enabled = true;

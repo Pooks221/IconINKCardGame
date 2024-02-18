@@ -6,7 +6,7 @@ using TMPro;
 
 public class CardPile : NetworkBehaviour
 {
-    public List<NetworkObject> cardList;
+    public List<NetworkObject> cardPileList;
     public TextMeshProUGUI cardCountText;
     // Start is called before the first frame update
     void Start()
@@ -20,16 +20,34 @@ public class CardPile : NetworkBehaviour
 
     }
 
+    public List<NetworkObject> getCardList()
+    {
+        return cardPileList;
+    }
+
+    public void setCardPile(List<NetworkObject> cards)
+    {
+        cardPileList = cards;
+        if (cards.Count > 0)
+        {
+            for (int index = 0; index < cardPileList.Count - 1; index++)
+            {
+                cardPileList[index].gameObject.GetComponent<Card>().hideInCardPile(gameObject);
+            }
+            cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+        }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Card")
+        if (other.tag == "Card" && !cardPileList.Contains(other.gameObject.GetComponent<NetworkObject>()))
         {
-            cardList.Add(other.gameObject.GetComponent<NetworkObject>());
-            cardCountText.text = "ADD:"+cardList.Count;
-            cardList[cardList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
-            if (cardList.Count > 1)
+            cardPileList.Add(other.gameObject.GetComponent<NetworkObject>());
+            cardCountText.text = "ADD:"+ cardPileList.Count;
+            cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+            if (cardPileList.Count > 1)
             {
-                cardList[cardList.Count - 2].gameObject.GetComponent<Card>().hideInCardPile();
+                cardPileList[cardPileList.Count - 2].gameObject.GetComponent<Card>().hideInCardPile(gameObject);
             }
         }
     }
@@ -38,26 +56,26 @@ public class CardPile : NetworkBehaviour
         if (other.tag == "Card")
         {
             NetworkObject cardObj = other.gameObject.GetComponent<NetworkObject>();
-            if (cardObj != null && cardList.Contains(cardObj))
+            if (cardObj != null && cardPileList.Contains(cardObj))
             {
-                cardList.Remove(cardObj);
-                cardCountText.text = "Removed:" + cardList.Count;
-                if (cardList.Count > 0)
+                cardPileList.Remove(cardObj);
+                cardCountText.text = "Removed:" + cardPileList.Count;
+                if (cardPileList.Count > 0)
                 {
-                    cardList[cardList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+                    cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
                 }
             }
         }
         else if (other.tag == "CardCollision")
         {
             NetworkObject cardObj = other.gameObject.gameObject.GetComponent<NetworkObject>();
-            if (cardObj != null && cardList.Contains(cardObj))
+            if (cardObj != null && cardPileList.Contains(cardObj))
             {
-                cardList.Remove(cardObj);
-                cardCountText.text = "Removed:" + cardList.Count;
-                if (cardList.Count > 0)
+                cardPileList.Remove(cardObj);
+                cardCountText.text = "Removed:" + cardPileList.Count;
+                if (cardPileList.Count > 0)
                 {
-                    cardList[cardList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+                    cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
                 }
             }
         }

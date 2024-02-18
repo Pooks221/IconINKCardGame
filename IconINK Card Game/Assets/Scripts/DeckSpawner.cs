@@ -12,9 +12,9 @@ public class DeckSpawner : NetworkBehaviour
     private NetworkRunner runner;
     public GameObject prefabDeck;
     public Toggle deckToggle;
-    private bool TEST_MODE = false;
+    public GameObject DiscardPile;
+    private bool TEST_MODE = true;
 
-    private float spawnModifier = 0;
 
     private List<NetworkObject> deckList = new List<NetworkObject>();
     // Start is called before the first frame update
@@ -68,7 +68,12 @@ public class DeckSpawner : NetworkBehaviour
     }
     public void resetDeck()
     {
-        deckList[0].GetComponent<Deck>().ShuffleDeck();
+        deckList[0].GetComponent<Deck>().ResetDeck();
+    }
+    public void shuffleDeck()
+    {
+        deckList[0].GetComponent<Deck>().ShuffleDeck(new List<NetworkObject>(DiscardPile.GetComponent<CardPile>().getCardList()));
+        DiscardPile.GetComponent<CardPile>().setCardPile(new List<NetworkObject>());
     }
 
     private async void SpawnDeck()

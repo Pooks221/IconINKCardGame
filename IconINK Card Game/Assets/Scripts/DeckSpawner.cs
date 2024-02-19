@@ -13,7 +13,7 @@ public class DeckSpawner : NetworkBehaviour
     public GameObject prefabDeck;
     public Toggle deckToggle;
     public GameObject DiscardPile;
-    private bool TEST_MODE = true;
+    private bool TEST_MODE = false;
 
 
     private List<NetworkObject> deckList = new List<NetworkObject>();

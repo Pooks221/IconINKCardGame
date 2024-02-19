@@ -25,10 +25,12 @@ public class Card : NetworkBehaviour
     public HandGrabInteractable handGrab;
     public Grabbable grabbable;
     //public UnityEvent<GameObject> toHand;
+    [Networked]
+    public string Suit { get; set;} = "None";
+    [Networked]
+    public string Value { get; set;} = "0";
+    public ChangeDetector _changes { get; private set; }
 
-
-    private string suit = "None";
-    private string value= "0";
     private bool gravityActive = true;
     private Vector3 lastPos = Vector3.zero;
     private bool released = false;
@@ -57,6 +59,11 @@ public class Card : NetworkBehaviour
 
     }
 
+    public void Awake()
+    {
+        setTexture();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -72,6 +79,13 @@ public class Card : NetworkBehaviour
         lastPos = transform.position;
     }
 
+    private async void setTexture()
+    {
+        await Task.Delay(1000);
+        setSuitAndValue(Suit, Value);
+    }
+
+
     private void customGravity()
     {
         if (gravityActive)
@@ -80,7 +94,8 @@ public class Card : NetworkBehaviour
         }
     }
 
-    public void hideInCardPile(GameObject pile)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_hideInCardPile(NetworkObject pile)
     {
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gravityActive = false;
@@ -95,7 +110,8 @@ public class Card : NetworkBehaviour
         handGrab.enabled = false;
         transform.parent = pile.transform;
     }
-    public void showCardOnPile(GameObject pile)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_showCardOnPile(NetworkObject pile)
     {
         gameObject.GetComponent<BoxCollider>().enabled = true;
         gravityActive = true;
@@ -156,20 +172,20 @@ public class Card : NetworkBehaviour
 
     public void setSuit(string s)
     {
-        suit = s;
+        Suit = s;
     }
 
     public void setValue(string v)
     {
-        value = v;
+        Value = v;
     }
     //[Rpc(RpcSources.All, RpcTargets.All)]
-    public void RPC_setSuitAndValue(string s, string v)
+    public void setSuitAndValue(string s, string v)
     {
-        suit = s;
-        value = v;
+        Suit = s;
+        Value = v;
 
-        //Debug.Log("Card Spawned:" + value + " of " + suit);
+        //Debug.Log("Card Spawned:" + Value + " of " + Suit);
 
         string matName = "CardMaterials/";
         switch (s)

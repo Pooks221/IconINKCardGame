@@ -46,7 +46,7 @@ public class Deck : NetworkBehaviour
             for (int value = 1; value <= valueAmount; value++)
             {
                 cardList.Add(spawnCard());
-                cardList[curCard].GetComponent<Card>().RPC_setSuitAndValue(getSuit(suit), getValue(value));
+                cardList[curCard].GetComponent<Card>().setSuitAndValue(getSuit(suit), getValue(value));
                 curCard++;
             }
         }

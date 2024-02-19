@@ -32,9 +32,9 @@ public class CardPile : NetworkBehaviour
         {
             for (int index = 0; index < cardPileList.Count - 1; index++)
             {
-                cardPileList[index].gameObject.GetComponent<Card>().hideInCardPile(gameObject);
+                cardPileList[index].gameObject.GetComponent<Card>().RPC_hideInCardPile(gameObject.GetComponent<NetworkObject>());
             }
-            cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+            cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().RPC_showCardOnPile(gameObject.GetComponent<NetworkObject>());
         }
     }
 
@@ -44,10 +44,10 @@ public class CardPile : NetworkBehaviour
         {
             cardPileList.Add(other.gameObject.GetComponent<NetworkObject>());
             cardCountText.text = "ADD:"+ cardPileList.Count;
-            cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+            cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().RPC_showCardOnPile(gameObject.GetComponent<NetworkObject>());
             if (cardPileList.Count > 1)
             {
-                cardPileList[cardPileList.Count - 2].gameObject.GetComponent<Card>().hideInCardPile(gameObject);
+                cardPileList[cardPileList.Count - 2].gameObject.GetComponent<Card>().RPC_hideInCardPile(gameObject.GetComponent<NetworkObject>());
             }
         }
     }
@@ -62,7 +62,7 @@ public class CardPile : NetworkBehaviour
                 cardCountText.text = "Removed:" + cardPileList.Count;
                 if (cardPileList.Count > 0)
                 {
-                    cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+                    cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().RPC_showCardOnPile(gameObject.GetComponent<NetworkObject>());
                 }
             }
         }
@@ -75,7 +75,7 @@ public class CardPile : NetworkBehaviour
                 cardCountText.text = "Removed:" + cardPileList.Count;
                 if (cardPileList.Count > 0)
                 {
-                    cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().showCardOnPile(gameObject);
+                    cardPileList[cardPileList.Count - 1].gameObject.GetComponent<Card>().RPC_showCardOnPile(gameObject.GetComponent<NetworkObject>());
                 }
             }
         }

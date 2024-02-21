@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SyncScale: 0
-  SyncParent: 0
+  SyncParent: 1
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1
 --- !u!114 &-1658634305960345102
@@ -445,6 +445,8 @@ MonoBehaviour:
   cardFace: {fileID: 866057216742559257}
   handGrab: {fileID: -3416854468272794721}
   grabbable: {fileID: 4021660370608907486}
+  _Suit: None
+  _Value: 0
 --- !u!1001 &8195590477023494277
 PrefabInstance:
   m_ObjectHideFlags: 0

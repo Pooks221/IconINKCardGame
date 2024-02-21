@@ -63,6 +63,7 @@ public class HandManager : MonoBehaviour
                 
                 item.transform.localPosition = (Pos3.localPosition + new Vector3(CardsInHand.IndexOf(item) * 0.02f, 0, CardsInHand.IndexOf(item) * -0.001f) );
                 item.transform.rotation = Pos3.rotation;
+                Debug.Log(CardsInHand.Count);
                 sfx.Play();
             }
             //CardsInHand[0].transform.position = Pos1.position;

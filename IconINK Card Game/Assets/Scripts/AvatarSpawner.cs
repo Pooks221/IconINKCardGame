@@ -8,7 +8,7 @@ using Oculus.Platform;
 using Oculus.Avatar2;
 using System.Threading.Tasks;
 
-public class AvatarSpawner : MonoBehaviour
+public class AvatarSpawner : NetworkBehaviour
 {
 
     public GameObject RunnerObject;
@@ -44,6 +44,10 @@ public class AvatarSpawner : MonoBehaviour
             runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
         }
         NetworkObject go = runner.Spawn(prefabAvatar, transform.position, transform.rotation, runner.LocalPlayer);
+        await Task.Delay(10000);
+        //go.AvatarSpawnRPC();
+
+
         var lipSync = FindObjectOfType<OvrAvatarLipSyncContext>();
         lipSync.CaptureAudio = true;
         //gameObject.GetComponent<go>().SetLipSync(lipSync);
@@ -82,4 +86,6 @@ public class AvatarSpawner : MonoBehaviour
     {
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
     }
+
+    
 }

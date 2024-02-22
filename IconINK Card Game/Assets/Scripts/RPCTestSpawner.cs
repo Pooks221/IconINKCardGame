@@ -36,26 +36,21 @@ public class RPCTestSpawner : NetworkBehaviour
 
     public void connected()
     {
+
+        runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
+        Debug.Log(runner);
+        NetworkObject HandPlacard1 = runner.Spawn(PlacardPrefab, Location1.transform.position, Location1.transform.rotation);
+        NetworkObject HandPlacard2 = runner.Spawn(PlacardPrefab, Location2.transform.position, Location2.transform.rotation);
+        NetworkObject HandPlacard3 = runner.Spawn(PlacardPrefab, Location3.transform.position, Location3.transform.rotation);
         
-        //NetworkObject HandPlacard1 = runner.Spawn(PlacardPrefab, Location1.transform.position, Location1.transform.rotation);
     }
 
     public async void ButtonPressed()
     {
-        Debug.Log("button pressed");
-        runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
+       runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
         Debug.Log(runner);
         await Task.Delay(1000);
-        Debug.Log("Meg's connected");
-        runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
-        Debug.Log(runner);
-        NetworkObject HandPlacard1 = runner.Spawn(PlacardPrefab, Location1.transform.position, Location1.transform.rotation);
-        Debug.Log("After1");
-        NetworkObject HandPlacard2 = runner.Spawn(PlacardPrefab, Location2.transform.position, Location2.transform.rotation);
-        Debug.Log("After2");
-        NetworkObject HandPlacard3 = runner.Spawn(PlacardPrefab, Location3.transform.position, Location3.transform.rotation);
-        Debug.Log("After3");
-
+        
 
         /*Debug.Log(prefabDeck);
         NetworkObject go = runner.Spawn(prefabDeck, transform.position, transform.rotation);

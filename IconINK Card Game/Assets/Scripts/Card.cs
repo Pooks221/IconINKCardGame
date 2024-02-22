@@ -42,6 +42,7 @@ public class Card : NetworkBehaviour
     private bool hoverPosition = false;
     private string Hand = "";
     private AudioSource sfx;
+    private GameObject Handv2;
 
     Renderer rend;
 
@@ -148,7 +149,7 @@ public class Card : NetworkBehaviour
             gravityActive = true;
             boxCollider.enabled = true;
             inHand = false;
-            HandManager handM = GameObject.Find(Hand).GetComponent<HandManager>();
+            HandManager handM = Handv2.GetComponent<HandManager>();
             handM.DepartCard(gameObject.GetComponent<NetworkObject>());
         }
         else
@@ -162,7 +163,7 @@ public class Card : NetworkBehaviour
             await Task.Delay(50);
             rend.enabled = false;
             inHand = true;
-            HandManager handM = GameObject.Find(Hand).GetComponent<HandManager>();
+            HandManager handM = Handv2.GetComponent<HandManager>();
             transform.parent = handM.transform;
             transform.localPosition = Vector3.zero;
             handM.RecieveCard(gameObject.GetComponent<NetworkObject>());
@@ -250,7 +251,8 @@ public class Card : NetworkBehaviour
             handLocation = other.transform.position;
             handRotation = other.transform.rotation;
             Hand = other.transform.parent.gameObject.name;
-            Debug.Log("hand name: " + Hand);
+            Handv2 = other.transform.parent.gameObject;
+            Debug.Log("hand name: " + Handv2);
             sfx = other.GetComponent<AudioSource>();
             sfx.Play();
         }
@@ -265,6 +267,7 @@ public class Card : NetworkBehaviour
             rend.enabled = false;
             inLocation = false;
             Hand = other.transform.parent.gameObject.name;
+            Handv2 = other.transform.parent.gameObject;
             Debug.Log("hand name: " + Hand);
         }
     }

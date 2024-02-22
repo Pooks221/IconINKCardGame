@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7977536827906575895}
   - component: {fileID: 975560645349313945}
   - component: {fileID: 5319467943345510506}
+  - component: {fileID: 9090332950519572614}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -118,14 +119,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6363329689731343807}
-  - {fileID: 1389713735799779186}
-  - {fileID: 1292726132607675440}
-  - {fileID: 5509516797398191179}
-  - {fileID: 2177673628124757836}
-  - {fileID: 763343498676531594}
-  - {fileID: 8509705637448198715}
   - {fileID: 5850639779540694730}
+  - {fileID: 8509705637448198715}
+  - {fileID: 763343498676531594}
+  - {fileID: 2177673628124757836}
+  - {fileID: 5509516797398191179}
+  - {fileID: 1292726132607675440}
+  - {fileID: 1389713735799779186}
+  - {fileID: 6363329689731343807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2667020201697052677
@@ -175,10 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transferOnSecondSelection: 0
+  _transferOnSecondSelection: 1
   _addNewPointsToFront: 0
   _forwardElement: {fileID: 0}
-  _oneGrabTransformer: {fileID: 0}
+  _oneGrabTransformer: {fileID: 9090332950519572614}
   _twoGrabTransformer: {fileID: 0}
   _targetTransform: {fileID: 0}
   _maxGrabPoints: -1
@@ -257,6 +258,38 @@ MonoBehaviour:
   SyncParent: 1
   _autoAOIOverride: 0
   DisableSharedModeInterpolation: 1
+--- !u!114 &9090332950519572614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838208075717059487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9597e632dfbca247bcf65e49c67078e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _constraints:
+    ConstraintsAreRelative: 1
+    MinX:
+      Constrain: 1
+      Value: -0.4
+    MaxX:
+      Constrain: 1
+      Value: 0.4
+    MinY:
+      Constrain: 1
+      Value: 0
+    MaxY:
+      Constrain: 1
+      Value: 0
+    MinZ:
+      Constrain: 1
+      Value: -0.4
+    MaxZ:
+      Constrain: 1
+      Value: 0.4
 --- !u!1 &4119219942748835343
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 4119219942748835343}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.401, y: 0.6452503, z: -0}
+  m_LocalPosition: {x: -0.401, y: 0.6452503, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

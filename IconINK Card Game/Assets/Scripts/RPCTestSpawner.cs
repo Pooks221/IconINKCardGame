@@ -20,6 +20,8 @@ public class RPCTestSpawner : NetworkBehaviour
     private NetworkObject HandPlacard2;
     private NetworkObject HandPlacard3;
     private NetworkObject HandPlacard4;
+
+    private bool PlacardsRan = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +41,16 @@ public class RPCTestSpawner : NetworkBehaviour
 
         runner = Fusion.NetworkRunner.GetRunnerForGameObject(gameObject);
         Debug.Log(runner);
-        NetworkObject HandPlacard1 = runner.Spawn(PlacardPrefab, Location1.transform.position, Location1.transform.rotation);
-        NetworkObject HandPlacard2 = runner.Spawn(PlacardPrefab, Location2.transform.position, Location2.transform.rotation);
-        NetworkObject HandPlacard3 = runner.Spawn(PlacardPrefab, Location3.transform.position, Location3.transform.rotation);
+        Debug.Log(PlacardsRan);
+        if (!PlacardsRan)
+        {
+            NetworkObject HandPlacard1 = runner.Spawn(PlacardPrefab, Location1.transform.position, Location1.transform.rotation);
+            NetworkObject HandPlacard2 = runner.Spawn(PlacardPrefab, Location2.transform.position, Location2.transform.rotation);
+            NetworkObject HandPlacard3 = runner.Spawn(PlacardPrefab, Location3.transform.position, Location3.transform.rotation);
+            PlacardsRan = true;
+            Debug.Log(PlacardsRan);
+        }
+        
         
     }
 
